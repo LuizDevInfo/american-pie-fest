@@ -1,0 +1,92 @@
+.position-campos {
+    padding-left: 30%;
+}
+
+.formt-img {
+    max-width: 100%;
+    height: auto;
+}
+
+.row-input-name {
+    padding-left: 20px;
+    padding-bottom: 30px;
+}
+
+.campo-nome {
+    background-color: white !important;
+    color: black !important;
+}
+
+.campo-pesquisa {
+    background-color: white !important;
+    color: black !important;
+}
+
+.position-icons {
+    padding-left: 10px;
+}
+
+.button-busca {
+
+}
+
+.input-busca {
+    float: right;
+    margin-right: 30%;
+}
+
+.button {
+    height: 45px;
+    font-size: 16px !important;
+}
+
+@media (max-width: 575.98px) {
+    .campo-nome {
+        margin-left: -40%;
+        width: 125% !important;
+    }
+
+    .uniform {
+        margin-left: -95% !important;
+    }
+
+    .campo-pesquisa {
+        margin-left: 70px;
+        margin-bottom: 15px;
+    }
+
+    .button-busca {
+        margin-left: 42px;
+    }
+
+    .button {
+        width: 65%;
+    }
+}
+
+@media (min-width: 375px) and (max-width: 576px) {
+    .campo-pesquisa {
+        margin-left: 85px;
+    }
+
+}
+
+@media (min-width: 425px) and (max-width: 549px) {
+    .campo-pesquisa {
+        margin-left: 100px;
+    }
+
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .campo-pesquisa {
+        margin-left: 30px;
+    }
+
+    .button {
+        margin-top: 1px;
+    }
+    .input-busca {
+        margin-right: 24%;
+    }
+}
