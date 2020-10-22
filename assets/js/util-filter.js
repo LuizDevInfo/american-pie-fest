@@ -4,11 +4,16 @@ $(document).ready(function () {
     $(".fh5co-loader").fadeOut("slow");
 });
 
+function totalConfirmados() {
+    $('#totalCheck').html(nomeNaListaCarregado.filter(nome => nome.confirmado === 'S').length);
+    $('#totalCheckM').html(nomeNaListaCarregado.filter(nome => nome.confirmado === 'S' && nome.sexo === 'M').length);
+    $('#totalCheckH').html(nomeNaListaCarregado.filter(nome => nome.confirmado === 'S' && nome.sexo === 'H').length);
+}
 
 function snackBarMsg(msg) {
     var x = document.getElementById("snackbar");
     x.innerText = msg;
-    x.style.backgroundColor = "#9d1e15";
+    x.style.backgroundColor = "#28a745";
     x.className = "show";
     setTimeout(function () {
         x.className = x.className.replace("show", "");
@@ -112,6 +117,7 @@ function carregarListaComCheck() {
             nomeNaLista = data;
             nomeNaListaCarregado = data;
             montarTableComCheck(nomeNaListaCarregado)
+            totalConfirmados()
         },
         error: function (jqXHR, textStatus, errorThrown) {
             alert('Erro ao carregar');

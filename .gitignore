@@ -1,0 +1,9 @@
+target
+*.jar
+*.aar
+*.zip
+node_modules
+/www
+idea/**
+
+src/connection/PdoCon.php
