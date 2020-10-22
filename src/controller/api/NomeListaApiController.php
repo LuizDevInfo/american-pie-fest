@@ -27,4 +27,11 @@ if (isset($_GET['carregarTotal'])) {
     echo json_encode($nome);
 }
 
+if (isset($_GET['idNomeConfirmar'])) {
+    $nomeLista = new NomeListaController();
+    $retorno = $nomeLista->confirmarPresenca($_GET['idNomeConfirmar']);
+
+    echo json_encode($retorno);
+}
+
 ?>

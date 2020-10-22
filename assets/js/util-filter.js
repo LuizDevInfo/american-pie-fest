@@ -1,21 +1,9 @@
 $(document).ready(function () {
-    dataEventoTimer()
-    carregarListaDeNome();
-    carregarTotalLista();
+    carregarListaComCheck();
+    carregarTotalListaTotal();
     $(".fh5co-loader").fadeOut("slow");
 });
 
-function dataEventoTimer() {
-
-    simplyCountdown('.simply-countdown-one', {
-        year: 2020,
-        month: 10,
-        day: 23,
-        hours: 22,
-        minutes: 0,
-        seconds: 0,
-    });
-}
 
 function snackBarMsg(msg) {
     var x = document.getElementById("snackbar");
@@ -28,31 +16,6 @@ function snackBarMsg(msg) {
 
 }
 
-function snackBar(el, msg) {
-    var x = document.getElementById("snackbar");
-    if (el == null) {
-        x.innerText = "Erro ao adicionar na lista";
-        x.style.backgroundColor = "#9d1e15";
-        x.className = "show";
-        setTimeout(function () {
-            x.className = x.className.replace("show", "");
-        }, 3000);
-
-    } else {
-        x.innerText = "Vocë foi adicionado na lista";
-        x.style.backgroundColor = "#28a745";
-        x.className = "show";
-        setTimeout(function () {
-            x.className = x.className.replace("show", "");
-        }, 3000);
-    }
-
-}
-
-function setarValorSexoFunc(sexo) {
-    setarValorSexo = sexo;
-}
-
 function setarValorSexoFuncPesquisa(sexo) {
     setarValorSexo = sexo;
 
@@ -63,119 +26,49 @@ function setarValorSexoFuncPesquisa(sexo) {
     procurarNomeNaLista()
 }
 
-let nomeExistente = false;
-
-function verificarNomeExistente(nome) {
-    $.ajax({
-        url: "src/controller/api/NomeListaApiController.php?nomeExistente=" + nome,
-        type: 'GET',
-        async: false,
-        cache: false,
-        contentType: false,
-        processData: true,
-        success: function (data) {
-            nomeExistente = JSON.parse(data);
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert('Erro ao carregar');
-            console.log(errorThrown);
-        }
-    });
-}
 
 let setarValorSexo = 'H';
-let aguardeSave = true
 
-function adicionarNaLista() {
-    let url = "src/controller/api/NomeListaApiController.php";
+function confirmarNome(idNome) {
+    let url = "src/controller/api/NomeListaApiController.php?idNomeConfirmar=" + idNome;
 
-    let formData = new FormData();
-    let nome = $('#nome').val();
-
-    if (nome === "") {
-        snackBarMsg("Coloque seu nome");
-        aguardeSave = true
-        return;
-    }
-
-    if (nome.length < 6) {
-        snackBarMsg("Coloque nome e sobrenome");
-        aguardeSave = true
-        return;
-    }
-
-    if (!nome.includes(" ")) {
-        snackBarMsg("Coloque nome e sobrenome");
-        aguardeSave = true
-        return;
-    }
-
-    verificarNomeExistente(nome)
-
-    if (nomeExistente.valor) {
-        snackBarMsg("Esse nome ja foi adicionado");
-        aguardeSave = true
-        return;
-    }
-
-    formData.append('nome', nome);
-    formData.append('sexo', setarValorSexo);
-    formData.append('method', 'inserirNomeNaListaApiController');
-
-    if (aguardeSave) {
-        $(".fh5co-loader").fadeOut("slow");
         $.ajax({
             url: url,
-            type: 'POST',
-            data: formData,
+            type: 'GET',
             async: false,
             cache: false,
             contentType: false,
             processData: false,
             success: function (data) {
-                snackBar(data);
-                carregarListaDeNome()
-                carregarTotalLista()
-                aguardeSave = false
-                window.location.href = "#main"
+                carregarListaComCheck(nomeNaListaCarregado)
+                snackBarMsg("Confirmado com sucesso")
+                $('#nome').val("");
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert('Erro ao carregar');
                 console.log(errorThrown);
             }
         });
-    } else {
-        snackBarMsg("Aguarde um instante");
-    }
-}
-
-function montarTable(nomeNaListaArray) {
-    $('#table tbody').remove()
-
-    nomeNaListaArray.forEach(data => {
-        $('#table').append('<tbody></tbody>');
-
-        let tabelaParametro = document.querySelector('#table tbody');
-        let tr = document.createElement("tr");
-
-        tr.innerHTML = "<td>" + data.nome + "</td>"
-        tabelaParametro.appendChild(tr);
-    })
 }
 
 function montarTableComCheck(nomeNaListaArray) {
     $('#table tbody').remove()
 
-    nomeNaListaArray.forEach(data => {
+    for (var i in nomeNaListaArray) {
         $('#table').append('<tbody></tbody>');
 
         let tabelaParametro = document.querySelector('#table tbody');
         let tr = document.createElement("tr");
 
-        tr.innerHTML = "<td>" + data.nome + "</td>" +
-            "<td>" + data.confirmado + "</td>";
+        tr.innerHTML = "<td>" + nomeNaListaArray[i].nome + "</td>" +
+            "<td onclick='confirmarNome(" + nomeNaListaArray[i].id + ")'>" +
+        "<input type='radio' name='"+ nomeNaListaArray[i].id +"' value='S' id='"+ nomeNaListaArray[i].id +"' />" +
+        "<label class='form-check-label' for='exampleCheck1'></label>" +
+       "</td>";
         tabelaParametro.appendChild(tr);
-    })
+
+        document.getElementById(nomeNaListaArray[i].id).checked = nomeNaListaArray[i].confirmado === 'S' ? true : false;
+    }
 }
 
 function procurarNomeNaLista() {
@@ -204,32 +97,7 @@ function procurarNomeNaLista() {
 let nomeNaLista;
 let nomeNaListaCarregado;
 
-function carregarListaDeNome() {
-    $(".fh5co-loader").fadeOut("slow");
-    $.ajax({
-        url: "src/controller/api/NomeListaApiController.php?carregaLista=lista",
-        type: 'GET',
-        async: true,
-        cache: false,
-        contentType: false,
-        processData: false,
-        success: function (data) {
-            data = JSON.parse(data);
-            $('#table tbody').remove()
-
-            nomeNaLista = data;
-            nomeNaListaCarregado = data;
-            montarTable(nomeNaListaCarregado)
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert('Erro ao carregar');
-            console.log(errorThrown);
-        }
-    });
-}
-
 function carregarListaComCheck() {
-    $(".fh5co-loader").fadeOut("slow");
     $.ajax({
         url: "src/controller/api/NomeListaApiController.php?carregaLista=lista",
         type: 'GET',
@@ -243,7 +111,7 @@ function carregarListaComCheck() {
 
             nomeNaLista = data;
             nomeNaListaCarregado = data;
-            montarTable(nomeNaListaCarregado)
+            montarTableComCheck(nomeNaListaCarregado)
         },
         error: function (jqXHR, textStatus, errorThrown) {
             alert('Erro ao carregar');
@@ -252,7 +120,7 @@ function carregarListaComCheck() {
     });
 }
 
-function carregarTotalLista() {
+function carregarTotalListaTotal() {
     $.ajax({
         url: "src/controller/api/NomeListaApiController.php?carregarTotal=lista",
         type: 'GET',

@@ -39,18 +39,18 @@
             <div class="position-campos">
                 <div class="row-input-name">
                     <div class="6u 12u$(xsmall)">
-                        <input type="text" class="campo-nome" name="nome" id="nome" value="" placeholder="Nome"/>
+                        <input type="text" class="campo-nome" name="nome" id="nome" value="" onkeyup="procurarNomeNaLista()" placeholder="Nome"/>
                     </div>
                 </div>
             </div>
             <div class="row uniform">
                 <div class="4u 12u$(small)">
-                    <input type="radio" id="priority-low" value="H" name="sexo" onclick="setarValorSexoFunc('H')"
+                    <input type="radio" id="priority-low" value="H" name="sexo" onclick="setarValorSexoFuncPesquisa('H')"
                            checked>
                     <label for="priority-low" style="color: white">Homem</label>
                 </div>
                 <div class="4u 12u$(small) style-radio-m">
-                    <input type="radio" id="priority-normal" value="M" onclick="setarValorSexoFunc('M')"
+                    <input type="radio" id="priority-normal" value="M" onclick="setarValorSexoFuncPesquisa('M')"
                            name="sexo">
                     <label for="priority-normal" style="color: white">Mulher</label>
                 </div>
@@ -61,7 +61,7 @@
                     <thead>
                     <tr>
                         <th>Nome</th>
-                        <th>Check</th>
+                        <th>Confirmar Presença</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -120,7 +120,7 @@
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/jquery.scrolly.min.js"></script>
 <script src="assets/js/skel.min.js"></script>
-<script src="assets/js/util.js?1433981258"></script>
+<script src="assets/js/util-filter.js?1433981258"></script>
 <script src="assets/js/main.js"></script>
 <script src="assets/js/simplyCountdown.js?1433981258"></script>
 

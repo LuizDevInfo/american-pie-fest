@@ -46,6 +46,11 @@ class NomeListaController extends NomeListaRepository
         $nomeFestaAtual = "AmericanPie1.0";
         return $this->carregarObjetoTotalLista($nomeFestaAtual);
     }
+
+    public function confirmarPresenca($id)
+    {
+        return $this->confirmarPresencaRepo($id);
+    }
 }
 
 ?>

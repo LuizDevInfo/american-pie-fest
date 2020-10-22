@@ -201,6 +201,62 @@ WHERE
             return $e;
         }
     }
+
+    protected function recuperarNomeLista($idNome)
+    {
+        try {
+            $sql = 'SELECT * FROM TB_NOME_LISTA WHERE id = :idNome';
+            $this->pdoCon = new PdoCon();
+            $this->conexao = $this->pdoCon->getInstance();
+            $stm = $this->conexao->prepare($sql);
+
+            $stm->bindValue(':idNome', $idNome, PDO::PARAM_STR);
+
+            $this->conexao->beginTransaction();
+            $stm->execute();
+            $this->conexao->commit();
+            $returno = $stm->fetch();
+            $this->conexao = $this->pdoCon->desconectar();
+
+            return $returno;
+        } catch (PDOException $e) {
+            echo $e;
+            return $e;
+        }
+    }
+
+    protected function confirmarPresencaRepo($idNome)
+    {
+        $nome = $this->recuperarNomeLista($idNome);
+
+        if ($nome['confirmado'] === 'N') {
+            $confirmacao = 'S';
+        } else {
+            $confirmacao = 'N';
+        }
+
+        try {
+            $sql = 'UPDATE TB_NOME_LISTA SET confirmado = :confirmacao WHERE id = :idNome';
+            $this->pdoCon = new PdoCon();
+            $this->conexao = $this->pdoCon->getInstance();
+            $stm = $this->conexao->prepare($sql);
+
+            $stm->bindValue(':idNome', $idNome, PDO::PARAM_STR);
+            $stm->bindValue(':confirmacao', $confirmacao, PDO::PARAM_STR);
+
+            $this->conexao->beginTransaction();
+            $stm->execute();
+            $this->conexao->commit();
+            $returno = $stm->fetch();
+            $this->conexao = $this->pdoCon->desconectar();
+
+            return $returno;
+
+        } catch (PDOException $e) {
+            echo $e;
+            return $e;
+        }
+    }
 }
 
 ?>
