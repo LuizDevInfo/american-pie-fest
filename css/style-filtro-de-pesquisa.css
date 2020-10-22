@@ -11,6 +11,8 @@
 
 .uniform {
     margin-left: 20px !important;
+    margin-bottom: 8% !important;
+
 }
 
 .position-campos {
@@ -56,6 +58,14 @@
 }
 
 @media (max-width: 575.98px) {
+    .campo-nome {
+        margin-left: -55px;
+    }
+    .style-radio-m{
+        position: absolute;
+        margin-left: 125px;
+    }
+
     .style-pesquisa-button {
         font-size: 10px;
     }
@@ -67,24 +77,29 @@
     }
 
     .position-campos {
-        margin-bottom: 25%;
+        margin-bottom: 10%;
     }
 
     .uniform {
+        margin-bottom: 60px!important;
     }
 }
 
 @media (min-width: 375px) and (max-width: 576px) {
     #button {
         margin-right: 235px;
-
-
+    }
+    .uniform {
+        margin-left: 47px !important;
     }
 }
 
 @media (min-width: 425px) and (max-width: 549px) {
     #button {
         margin-right: 275px;
+    }
+    .campo-nome {
+        margin-left: -82px;
     }
 }
 
