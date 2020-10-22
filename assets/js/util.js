@@ -114,7 +114,6 @@ function adicionarNaLista() {
 
     if (aguardeSave) {
         $(".fh5co-loader").fadeOut("slow");
-        $('#mySpinner').addClass('spinner');
         $.ajax({
             url: url,
             type: 'POST',
