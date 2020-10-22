@@ -1,0 +1,192 @@
+.position-campos {
+    margin-bottom: 10%;
+}
+
+#button {
+    float: right;
+    margin-right: 250px;
+    margin-top: -43px;
+    background-color: black;
+}
+
+.uniform {
+    margin-left: 20px !important;
+}
+
+.position-campos {
+    padding-left: 30%;
+}
+
+.formt-img {
+    max-width: 100%;
+    height: auto;
+}
+
+.row-input-name {
+    padding-left: 20px;
+    padding-bottom: 30px;
+}
+
+.campo-nome {
+    background-color: white !important;
+    color: black !important;
+}
+
+.campo-pesquisa {
+    background-color: white !important;
+    color: black !important;
+}
+
+.position-icons {
+    padding-left: 10px;
+}
+
+.button-busca {
+
+}
+
+.input-busca {
+    float: right;
+    margin-right: 30%;
+}
+
+.button {
+    height: 45px;
+    font-size: 16px !important;
+}
+
+@media (max-width: 575.98px) {
+    .style-pesquisa-button {
+        font-size: 10px;
+    }
+
+    #button {
+        margin-right: 210px;
+        width: 70px;
+        height: 49px;
+    }
+
+    .position-campos {
+        margin-bottom: 25%;
+    }
+
+    .uniform {
+    }
+}
+
+@media (min-width: 375px) and (max-width: 576px) {
+    #button {
+        margin-right: 235px;
+
+
+    }
+}
+
+@media (min-width: 425px) and (max-width: 549px) {
+    #button {
+        margin-right: 275px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    #button {
+        float: right;
+        margin-right: 495px;
+    }
+}
+
+.countdown {
+    height: 50px;
+}
+
+#snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #28a745;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+}
+
+#snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+.simply-countdown {
+    /* The countdown */
+    margin-bottom: 2em;
+}
+
+.simply-countdown > .simply-section {
+    /* coutndown blocks */
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    background: #062038;
+    margin: 0 4px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+    position: relative;
+    animation: pulse 1s ease infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+.simply-countdown > .simply-section > div {
+    /* countdown block inner div */
+    display: table-cell;
+    vertical-align: middle;
+    height: 100px;
+    width: 100px;
+}
+
+.simply-countdown > .simply-section .simply-amount,
+.simply-countdown > .simply-section .simply-word {
+    display: block;
+    color: white;
+    /* amounts and words */
+}
+
+.simply-countdown > .simply-section .simply-amount {
+    font-size: 30px;
+    /* amounts */
+}
+
+.simply-countdown > .simply-section .simply-word {
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    font-size: 12px;
+    /* words */
+}
+
+.fh5co-loader {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: url(../images/loader.gif) center no-repeat #fff;
+}
